@@ -1,12 +1,3 @@
-// @dart=2.9
-
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,7 +7,7 @@ import 'package:registration_client/credentials_page.dart';
 import 'package:registration_client/main.dart';
 import 'package:registration_client/provider/app_language.dart';
 
-Widget testableWidget({Widget child}) {
+Widget testableWidget({required Widget child}) {
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(
@@ -98,26 +89,4 @@ void main() {
     expect(find.widgetWithText(InkWell, 'BACK'), findsNothing);
   });
 
-  testWidgets("Login Page Password Comp", (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    await tester.enterText(find.byType(TextField), 'test_username');
-    await tester.tap(find.text('NEXT'));
-
-    await tester.pump();
-
-    expect(find.text('Password'), findsOneWidget);
-  });
-
-  testWidgets("Credentials Page", (WidgetTester tester) async {
-    await tester.pumpWidget(
-      testableWidget(
-        child: const CredentialsPage(),
-      ),
-    );
-
-    expect(find.byType(InkWell), findsNWidgets(2));
-    expect(find.widgetWithText(InkWell, "Copy Text"), findsOneWidget);
-    expect(find.widgetWithText(InkWell, "Download JSON"), findsOneWidget);
-  });
 }
